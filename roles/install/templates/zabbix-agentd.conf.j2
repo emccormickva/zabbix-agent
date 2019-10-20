@@ -1,0 +1,69 @@
+#######Active Agent config
+PidFile=/var/run/zabbix/zabbix_agentd.pid
+### Option: LogType
+#       Specifies where log messages are written to:
+#               system - syslog
+#               file - file specified with LogFile parameter
+#               console - standard output
+# Mandatory: no
+# Default:
+LogType=file
+LogFile=/var/log/zabbix/zabbix_agentd.log
+### Option: LogFileSize
+#       Maximum size of log file in MB.
+#       0 - disable automatic log rotation.
+# Range: 0-1024
+# Default:
+# LogFileSize=1
+
+LogFileSize=50
+
+### Option: DebugLevel
+#       Specifies debug level:
+#       0 - basic information about starting and stopping of Zabbix processes
+#       1 - critical information
+#       2 - error information
+#       3 - warnings
+#       4 - for debugging (produces lots of information)
+#       5 - extended debugging (produces even more information)
+# Mandatory: no
+# Range: 0-5
+# Default:
+DebugLevel=2
+SourceIP=0.0.0.0
+############ change ######
+ListenIP=0.0.0.0
+Hostname={{ ansible_facts['nodename'] }}
+### Option: EnableRemoteCommands
+#       Whether remote commands from Zabbix server are allowed.
+#       0 - not allowed
+#       1 - allowed
+#
+# Mandatory: no
+# Default:
+# EnableRemoteCommands=0
+### Option: LogRemoteCommands
+#       Enable logging of executed shell commands as warnings.
+#       0 - disabled
+#       1 - enabled
+#
+# Mandatory: no
+# Default:
+# LogRemoteCommands=0
+##### Passive checks related
+StartAgents=0
+ServerActive=zabbix.cirrusseven.com
+# HostnameItem=system.hostname
+RefreshActiveChecks=120
+### Option: BufferSend
+#  Do not keep data longer than N seconds in buffer.
+# Mandatory: no
+# Range: 1-3600
+# Default:
+BufferSend=60
+BufferSize=100
+MaxLinesPerSecond=20
+############ ADVANCED PARAMETERS #################
+Timeout=5
+Include=/etc/zabbix/zabbix_agentd.d/*.conf
+
